@@ -56,7 +56,7 @@ bash 'ssh hardening' do
 end
 
 service 'ssh' do
-  provider Chef::Provider::Service::Upstart
+  provider Chef::Provider::Service::Systemd
   supports :restart => true
   action :restart
 end
