@@ -1,19 +1,13 @@
-users_manage 'sysadmin' do
-  group_id 3000
-  action [:create]
-  data_bag 'users'
-end
+# list of security specific packages to be installed
+packages = %w(
+  fail2ban
+  ufw
+  unattended-upgrades
+)
 
-# # list of security specific packages to be installed
-# packages = %w(
-#   fail2ban
-#   ufw
-#   unattended-upgrades
-# )
-#
-# # install the above security packages
-# packages.each { |name| package name }
-#
+# install the above security packages
+packages.each { |name| package name }
+
 # # Set the system to install security updates automatically each day
 # file '/etc/apt/apt.conf.d/10periodic' do
 #   owner 'root'
