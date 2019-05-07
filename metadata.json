@@ -1,0 +1,23 @@
+{
+	"name": "basic-security-chef",
+	"description": "Basic Security fixes for a Ubuntu Install. E.g. remove SSH password & root login etc",
+	"long_description": "",
+	"maintainer": "Björn Lennartsson",
+	"maintainer_email": "bjorn@ratherunique.se",
+	"license": "none",
+	"platforms": {
+		"ubuntu": ">= 0.0.0"
+	},
+	"dependencies": {},
+	"recommendations": {},
+	"suggestions": {},
+	"conflicting": {},
+	"providing": {},
+	"replacing": {},
+	"attributes": {},
+	"groupings": {},
+	"recipes": {
+		"basic-security-chef": "Locks down a basic Ubuntu Install"
+	},
+	"version": "0.0.1"
+}
