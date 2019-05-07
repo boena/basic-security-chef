@@ -1,4 +1,4 @@
-users_manage 'sysadmins' do
+users_manage 'sysadmin' do
   group_id 3000
   action [:create]
   data_bag 'users'
