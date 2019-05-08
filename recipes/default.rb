@@ -78,7 +78,6 @@ if node[:swap_enabled]
   else
     bash 'setup swapfile' do
       user 'root'
-      owner 'root'
       group 'root'
 
       code <<-EOC
