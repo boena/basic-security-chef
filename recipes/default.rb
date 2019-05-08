@@ -72,6 +72,14 @@ bash "opening ufw for ssh traffic" do
   EOC
 end
 
+# Hardening setup of fail2ban
+template "/etc/fail2ban/jail.local" do
+  owner "root"
+  group "root"
+  mode "0644"
+  source "fail2ban.local.txt"
+end
+
 if node[:swap_enabled]
   if File.exist?('/var/swapfile')
     p 'Swap file already exists, skipping...'
