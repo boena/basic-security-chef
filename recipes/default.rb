@@ -72,6 +72,24 @@ bash "opening ufw for ssh traffic" do
   EOC
 end
 
+if node[:swap_enabled]
+  file '/var/swapfile' do
+    not_if { ::File.exist?('/var/swapfile') }
+    user 'root'
+    owner 'root'
+    group 'root'
+    mode '0600'
+    code <<-EOC
+      dd if=/dev/zero of=/var/swapfile bs=1M count=2048
+      mkswap /var/swapfile
+      echo /var/swapfile none swap defaults 0 0 | tee -a /etc/fstab
+      swapon -a
+    EOC
+  end
+else
+  p 'Swap is not enabled, skipping...'
+end
+
 
 # if we've specified firewall rules in the node definition
 # then apply them here. These should be in the format:
