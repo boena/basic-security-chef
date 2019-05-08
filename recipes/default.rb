@@ -80,6 +80,12 @@ template "/etc/fail2ban/jail.local" do
   source "fail2ban.local.txt"
 end
 
+service 'fail2ban' do
+  provider Chef::Provider::Service::Systemd
+  supports :restart => true
+  action :restart
+end
+
 if node[:swap_enabled]
   if File.exist?('/var/swapfile')
     p 'Swap file already exists, skipping...'
