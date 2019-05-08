@@ -73,18 +73,22 @@ bash "opening ufw for ssh traffic" do
 end
 
 if node[:swap_enabled]
-  file '/var/swapfile' do
-    not_if { ::File.exist?('/var/swapfile') }
-    user 'root'
-    owner 'root'
-    group 'root'
-    mode '0600'
-    code <<-EOC
-      dd if=/dev/zero of=/var/swapfile bs=1M count=2048
-      mkswap /var/swapfile
-      echo /var/swapfile none swap defaults 0 0 | tee -a /etc/fstab
-      swapon -a
-    EOC
+  if File.exist?('/var/swapfile')
+    p 'Swap file already exists, skipping...'
+  else
+    bash 'setup swapfile' do
+      user 'root'
+      owner 'root'
+      group 'root'
+
+      code <<-EOC
+        dd if=/dev/zero of=/var/swapfile bs=1M count=2048
+        chmod 600 /var/swapfile
+        mkswap /var/swapfile
+        echo /var/swapfile none swap defaults 0 0 | tee -a /etc/fstab
+        swapon -a
+      EOC
+    end
   end
 else
   p 'Swap is not enabled, skipping...'
